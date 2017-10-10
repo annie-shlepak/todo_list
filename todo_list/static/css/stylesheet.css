@@ -1,0 +1,87 @@
+.col-4 {
+    border-bottom-left-radius: 20px;
+    background-color: rgb(57,98,202);
+}
+
+.col-4 h3 {
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.col-4 h3 a{
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+}
+
+.col-4 h4 {
+    font-size: 20px;
+}
+
+.col-5, .col-3 {
+    background-color: rgb(226,226,226);
+}
+
+.col-5 h3 {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: bold;
+}
+
+.col-5 #task {
+    font-size: 18px;
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+.col-3 {
+    border-bottom-right-radius: 20px;
+}
+
+.col-3 label{
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.page-header {
+    background-color: #00adb5;
+    margin-top: 0;
+    padding: 20px 20px 20px 30px;
+}
+
+.page-header h1 {
+    color: #FFFFFF;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.left-column {
+    background-color: #393e46;
+
+}
+
+.left-column h3, a{
+    color: #FFFFFF;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: bold;
+}
+
+.left-column h4 a{
+    font-weight: normal;
+}
+
+.right-column {
+    background-color: #eeeeee;
+}
+
+.right-column h3 {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: bold;
+}
+
+a {
+    color: #00adb5;
+}
+
+h3 a, h4 a {
+    color: #ffffff;
+}

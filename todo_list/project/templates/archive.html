@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block main %}
+<h3>ARCHIVE</h3>
+{% if username %}
+{% for task in tasks %}
+    <div id="task">
+        <del>{{ task.task_title }} <i>till {{task.task_day}}, {{ task.task_time }}</i></del>
+    </div>
+{% endfor %}
+{% endif %}
+{% endblock %}
