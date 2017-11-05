@@ -7,4 +7,4 @@ TODO List
 - logging and register new users
 - an impossibility to look through tasks and to the actions with them without logging
 
-Using Python 3.5.3, Django 1.11.5, SQLite3
+Using Python 3.5.3 & Django 1.11.5
