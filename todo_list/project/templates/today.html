@@ -4,40 +4,15 @@
 {% block main %}
 <h3>TODAY</h3>
 {% if username %}
-<!--{% if messages %}-->
-<!--<ul class="messages">-->
-    <!--{% for message in messages %}-->
-    <!--<li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>-->
-    <!--{% endfor %}-->
-<!--</ul>-->
-<!--{% endif %}-->
 {% for task in tasks %}
     <div id="task">
         {{ task.task_title }} <i>till {{ task.task_time }}</i>
     </div>
-    <div class="btn-group">
-        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Options
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/finish_task/{{task.id}}/">Finish</a>
-            <a class="dropdown-item" href="/edit_task/{{task.id}}">Edit</a>
-            <a class="dropdown-item" href="/delete_task/{{task.id}}/">Delete</a>
-        </div>
-    </div>
+    {% include 'includes/_options.html' %}
+    {% block options %}{% endblock %}
 {% endfor %}
     <hr>
-        <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                +
-            </button>
-            <div class="dropdown-menu" onClick="event.stopPropagation();">
-                <form action="/addtask/" method="post">
-                    {% csrf_token %}
-                    {{ form.as_table }}
-                    <button type="submit" class="btn btn-primary">Add task</button>
-                </form>
-            </div>
-        </div>
+    {% include 'includes/_add_task.html' %}
+    {% block add_task %}{% endblock %}
 {% endif %}
 {% endblock %}

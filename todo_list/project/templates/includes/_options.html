@@ -1,0 +1,12 @@
+{% block options %}
+    <div class="btn-group">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/finish_task/{{task.id}}/">Finish</a>
+            <a class="dropdown-item" href="/edit_task/{{task.id}}">Edit</a>
+            <a class="dropdown-item" href="/delete_task/{{task.id}}/">Delete</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,7 +1,6 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Task, Project
-from django.forms.extras.widgets import SelectDateWidget
 
 
 class TaskForm(forms.ModelForm):
@@ -23,11 +22,10 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['task_title', 'task_priority', 'task_day', 'task_time', 'task_project']
-        # widgets = {'task_day': forms.DateInput(attrs={'id': 'datetimepicker'})}
+        fields = ['task_title', 'task_day', 'task_time', 'task_project']
 
 
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['project_title',]
+        fields = ['project_title']

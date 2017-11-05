@@ -1,6 +1,4 @@
 from django.db import models
-from datetime import date
-from django.utils import timezone
 
 
 # Create your models here.
@@ -25,22 +23,19 @@ class Task(models.Model):
     class Meta:
         db_table = "task"
 
-    PRIORITY = (
-        ('H', 'High'),
-        ('M', 'Medium'),
-        ('L', 'Low')
-    )
+    # PRIORITY = (
+    #     ('H', 'High'),
+    #     ('M', 'Medium'),
+    #     ('L', 'Low')
+    # )
+
     STATUS = (
         ('DONE', 'Done Task'),
         ('NOTDONE', 'Not Done Task')
     )
 
-    # @staticmethod
-    # def default_status():
-    #     return 'Not Done Task'
-
     task_title = models.CharField(max_length=200)
-    task_priority = models.CharField(max_length=1, choices=PRIORITY)
+    # task_priority = models.CharField(max_length=1, choices=PRIORITY)
     task_day = models.DateField()
     task_time = models.TimeField()
     task_status = models.CharField(max_length=7, choices=STATUS, default='NOTDONE')

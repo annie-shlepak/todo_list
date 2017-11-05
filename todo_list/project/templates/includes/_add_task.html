@@ -1,0 +1,14 @@
+{% block add_task %}
+    <div class="btn-group">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    +
+        </button>
+        <div class="dropdown-menu" onClick="event.stopPropagation();">
+            <form action="/add_task/" method="post">
+                {% csrf_token %}
+                {{ form.as_table }}
+                <button type="submit" class="btn btn-primary">Add task</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

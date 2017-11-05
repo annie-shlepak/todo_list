@@ -28,7 +28,6 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a href="/archive/" class="nav-link">Archive
-                                <!--<img src="/static/img/archive.png" width="30" height="30" class="d-inline-block align-top" alt="Archive"/>-->
                             </a>
                         </li>
                         <li class="nav-item">
@@ -72,7 +71,7 @@
                             +
                         </button>
                         <div class="dropdown-menu" onClick="event.stopPropagation();">
-                            <form action="/addproject/" method="post">
+                            <form action="/add_project/" method="post">
                                 {% csrf_token %}
                                 {{ form_p.as_table }}
                                 <button type="submit" class="btn btn-primary">Add Project</button>
