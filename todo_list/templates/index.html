@@ -43,15 +43,15 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-4 col-sm-3 col-md-3 col-lg-4 ml-auto py-3" style="min-height: 550px">
+            <div class="col-4 col-sm-4 col-md-3 col-lg-4 ml-auto py-3" style="min-height: 550px">
                 <h3><a href="/today/">Today</a></h3>
                 <h3><a href="/next_days/">Next 7 Days</a></h3>
                 <hr>
                 <h3>Projects</h3>
-                {% if username %}
+                <!--{% if username %}-->
                 {% for project in projects %}
                     <!--<h4>{{ project.project_color }}</h4>-->
-                    <h4><img src="/static/img/white-circle.png" width="10" height="10"><a href="/project_tasks/{{project.id}}/"> {{ project.project_title }}</a></h4>
+                    <h4><a href="/project_tasks/{{project.id}}/"> {{ project.project_title }}</a></h4>
                     <div class="btn-group">
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Options
@@ -63,9 +63,9 @@
                     </div>
                     <br>
                 {% endfor %}
-                {% endif %}
+                <!--{% endif %}-->
                 <hr>
-                {% if username %}
+                <!--{% if username %}-->
                     <div class="btn-group">
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             +
@@ -78,14 +78,14 @@
                             </form>
                         </div>
                     </div>
-                {% endif %}
+                <!--{% endif %}-->
             </div>
-            <div class="col-5 col-sm-7 col-md-7 col-lg-5 py-4" style="min-height: 550px">
+            <div class="col-8 col-sm-7 col-md-9 col-lg-8 py-4" style="min-height: 550px">
                 {% block main %}{% endblock %}
             </div>
-            <div class="col-3 col-sm-2 col-md-2 col-lg-3 py-4" style="min-height: 550px">
-                {% block login %}{% endblock %}
-            </div>
+            <!--<div class="col-3 col-sm-2 col-md-2 col-lg-3 py-4" style="min-height: 550px">-->
+                <!--{% block login %}{% endblock %}-->
+            <!--</div>-->
         </div>
 
 

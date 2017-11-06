@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 
 from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import csrf
@@ -8,7 +9,7 @@ from django.template.context_processors import csrf
 from .models import Project, Task
 from .forms import TaskForm, ProjectForm
 
-
+@login_required(login_url='/auth/login/')
 def get_today_task(request):
     task_form = TaskForm
     project_form = ProjectForm
@@ -22,7 +23,7 @@ def get_today_task(request):
     context.update(csrf(request))
     return render(request, 'today.html', context)
 
-
+@login_required(login_url='/auth/login/')
 def get_next_days_task(request):
     task_form = TaskForm
     project_form = ProjectForm
@@ -39,7 +40,7 @@ def get_next_days_task(request):
     }
     return render(request, 'next_days.html', context)
 
-
+@login_required(login_url='/auth/login/')
 def get_project_tasks(request, project_id=None):
     task_form = TaskForm
     project_form = ProjectForm
@@ -53,7 +54,7 @@ def get_project_tasks(request, project_id=None):
     }
     return render(request, 'project_tasks.html', context)
 
-
+@login_required(login_url='/auth/login/')
 def get_archive(request):
     project_form = ProjectForm
     context = {
@@ -64,7 +65,7 @@ def get_archive(request):
     }
     return render(request, 'archive.html', context)
 
-
+@login_required(login_url='/auth/login/')
 def add_today_task(request):
     if request.POST:
         form = TaskForm(request.POST)
@@ -75,7 +76,7 @@ def add_today_task(request):
             messages.error(request, 'Not Successfully Added.')
     return redirect('/')
 
-
+@login_required(login_url='/auth/login/')
 def add_project_task(request, project_id):
     if request.POST:
         form = TaskForm(request.POST)
@@ -83,7 +84,7 @@ def add_project_task(request, project_id):
             form.save()
     return redirect('/project_tasks/{}/'.format(project_id))
 
-
+@login_required(login_url='/auth/login/')
 def add_project(request):
     if request.POST:
         form_p = ProjectForm(request.POST)
@@ -101,7 +102,7 @@ def add_project(request):
     }
     return render(request, 'index.html', context)
 
-
+@login_required(login_url='/auth/login/')
 def edit_task(request, task_id):
     instance = get_object_or_404(Task, id=task_id)
     form = TaskForm(request.POST or None, instance=instance)
@@ -121,7 +122,7 @@ def edit_task(request, task_id):
     }
     return render(request, 'edit_task.html', context)
 
-
+@login_required(login_url='/auth/login/')
 def edit_project(request, project_id):
     instance = get_object_or_404(Project, id=project_id)
     form_p = ProjectForm(request.POST or None, instance=instance)
@@ -141,12 +142,12 @@ def edit_project(request, project_id):
     }
     return render(request, 'edit_project.html', context)
 
-
+@login_required(login_url='/auth/login/')
 def delete_task(request, task_id):
     Task.objects.get(id=task_id).delete()
     return redirect('/')
 
-
+@login_required(login_url='/auth/login/')
 def delete_project(request, project_id):
     Project.objects.get(id=project_id)
     if Task.objects.filter(task_project_id=project_id, task_status='NOTDONE'):
@@ -155,7 +156,7 @@ def delete_project(request, project_id):
         Project.objects.get(id=project_id).delete()
         return redirect('/')
 
-
+@login_required(login_url='/auth/login/')
 def finish_task(request, task_id):
     Task.objects.select_related().filter(id=task_id).update(task_status='DONE')
     return redirect('/')

@@ -2,11 +2,11 @@
 {% load staticfiles %}
 
 {% block main %}
-{% if username %}
-<h3>{{ project.project_title }}</h3>
+<!--{% if username %}-->
+<h3>{{ project.title }}</h3>
 {% for task in tasks %}
     <div id="task">
-        {{ task.task_title }} <i>till {{ task.task_day }}</i>
+        {{ task.title }} <i>till {{ task.task_day }}</i>
     </div>
     {% include 'includes/_options.html' %}
     {% block options %}{% endblock %}
@@ -14,5 +14,5 @@
 <hr>
     {% include 'includes/_add_task.html' %}
     {% block add_task %}{% endblock %}
-{% endif %}
+<!--{% endif %}-->
 {% endblock %}

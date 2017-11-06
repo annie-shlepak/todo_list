@@ -1,7 +1,8 @@
-{% extends 'index.html' %}
+{% extends 'loginsys.html' %}
+{% load staticfiles %}
+
 
 {% block login %}
-
 <div class="large-offset-3 large-6 columns">
   <form method="post" action="/auth/register/">
     {% csrf_token %}
@@ -10,5 +11,4 @@
     <button type="submit" class="btn btn-primary">Sign Up</button>
   </form>
 </div>
-
 {% endblock %}

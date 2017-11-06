@@ -1,12 +1,15 @@
 .col-4 {
     border-bottom-left-radius: 20px;
-    background-color: rgb(57,98,202);
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #52BEFC 25%, #2EF2FD 100%);
+    background: linear-gradient(to bottom right, #52BEFC 25%, #2EF2FD 100%);
 }
 
 .col-4 h3 {
     font-size: 30px;
     color: white;
     font-weight: bold;
+    text-shadow: 1px 1px 0.5px black, 0 0 1em grey;
 }
 
 .col-4 h3 a{
@@ -17,30 +20,30 @@
 
 .col-4 h4 {
     font-size: 20px;
+    text-shadow: 1px 1px 0.5px black, 0 0 1em grey;
 }
 
-.col-5, .col-3 {
-    background-color: rgb(226,226,226);
+.col-4 h4 a{
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px 0.5px black, 0 0 1em grey;
 }
 
-.col-5 h3 {
+
+.col-8 h3 {
     font-family: 'Archivo Narrow', sans-serif;
     font-weight: bold;
 }
 
-.col-5 #task {
+.col-8 #task {
     font-size: 18px;
     font-family: 'Archivo Narrow', sans-serif;
 }
 
-.col-3 {
-    border-bottom-right-radius: 20px;
-}
-
-.col-3 label{
-    font-family: 'Archivo Narrow', sans-serif;
+.col-8 h6 {
+    font-size: 17px;
+    color: grey;
     font-weight: bold;
-    font-size: 18px;
 }
 
 .page-header {
