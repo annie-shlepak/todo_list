@@ -27,8 +27,8 @@ def get_today_task(request):
 def get_next_days_task(request):
     task_form = TaskForm
     project_form = ProjectForm
-    day = date.today()
-    period = day + timedelta(days=7)
+    tomorrow = date.today() + timedelta(1)
+    period = tomorrow + timedelta(days=7)
     period.strftime('%Y-%m-%d')
     context = {
         'projects': Project.objects.all(),

@@ -4,21 +4,9 @@ from .models import Task, Project
 
 
 class TaskForm(forms.ModelForm):
-    task_title = forms.CharField(widget=forms.TextInput(
-        attrs={
-            'placeholder': 'Do something..'
-        }
-    ))
-    task_day = forms.CharField(widget=forms.DateInput(
-        attrs={
-            'placeholder': 'YYYY-MM-DD'
-        }
-    ))
-    task_time = forms.CharField(widget=forms.TimeInput(
-        attrs={
-            'placeholder': 'HH:MM:SS'
-        }
-    ))
+    task_title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Do something..'}))
+    task_day = forms.CharField(widget=forms.SelectDateWidget(attrs={'placeholder': 'YYYY-MM-DD'}))
+    task_time = forms.CharField(widget=forms.TimeInput(format='%H:%M', attrs={'placeholder': 'H:M'}))
 
     class Meta:
         model = Task

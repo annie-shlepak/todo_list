@@ -6,7 +6,7 @@
         <div class="dropdown-menu" onClick="event.stopPropagation();">
             <form action="/add_task/" method="post">
                 {% csrf_token %}
-                {{ form.as_table }}
+                {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Add task</button>
             </form>
         </div>

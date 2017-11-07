@@ -32,13 +32,13 @@ class Project(models.Model):
         return self.project_title
 
 # signal
-def project_pre_save(sender, instance, *args, **kwargs):
-    print('Saving..')
-    print(instance.timestamp)
-    if not instance.slug:
-        instance.slug = unique_slug_generator(instance)
-
-pre_save.connect(project_pre_save, sender=Project)
+# def project_pre_save(sender, instance, *args, **kwargs):
+#     print('Saving..')
+#     print(instance.timestamp)
+#     if not instance.slug:
+#         instance.slug = unique_slug_generator(instance)
+#
+# pre_save.connect(project_pre_save, sender=Project)
 
 
 class Task(models.Model):
@@ -77,10 +77,10 @@ class Task(models.Model):
         return self.task_title  # obj.title
 
 # signal
-def task_pre_save(sender, instance, *args, **kwargs):
-    print('Saving..')
-    print(instance.timestamp)
-    if not instance.slug:
-        instance.slug = unique_slug_generator(instance)
-
-pre_save.connect(task_pre_save, sender=Task)
+# def task_pre_save(sender, instance, *args, **kwargs):
+#     print('Saving..')
+#     print(instance.timestamp)
+#     if not instance.slug:
+#         instance.slug = unique_slug_generator(instance)
+#
+# pre_save.connect(task_pre_save, sender=Task)
