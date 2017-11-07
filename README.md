@@ -11,6 +11,7 @@ Functionality:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 ### Prerequisites
 You need to have Python 3.5.3 at least, pip and virtualenv to run this project properly.
+
 To install pip if you don't have one:
 ```
 $ python get-pip.py
