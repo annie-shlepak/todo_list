@@ -10,12 +10,13 @@ class Project(models.Model):
     class Meta:
         db_table = "project"
 
-    COLORS = (
-        ('R', 'Red'),
-        ('B', 'Blue'),
-        ('G', 'Green'),
-        ('Y', 'Yellow')
-    )
+    # COLORS = (
+    #     ('R', 'Red'),
+    #     ('B', 'Blue'),
+    #     ('G', 'Green'),
+    #     ('Y', 'Yellow')
+    # )
+
     project_title = models.CharField(max_length=200)
 
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
@@ -65,8 +66,6 @@ class Task(models.Model):
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
     updated = models.DateTimeField(default=datetime.now)
 
-    slug = models.SlugField(null=True, blank=True)
-
     task_project = models.ForeignKey(Project)
 
     def __str__(self):
@@ -75,12 +74,3 @@ class Task(models.Model):
     @property
     def title(self):
         return self.task_title  # obj.title
-
-# signal
-# def task_pre_save(sender, instance, *args, **kwargs):
-#     print('Saving..')
-#     print(instance.timestamp)
-#     if not instance.slug:
-#         instance.slug = unique_slug_generator(instance)
-#
-# pre_save.connect(task_pre_save, sender=Task)

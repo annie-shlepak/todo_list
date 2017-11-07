@@ -27,13 +27,13 @@ def get_today_task(request):
 def get_next_days_task(request):
     task_form = TaskForm
     project_form = ProjectForm
-    tomorrow = date.today() + timedelta(1)
-    period = tomorrow + timedelta(days=7)
+    day = date.today()
+    period = day + timedelta(days=7)
     period.strftime('%Y-%m-%d')
     context = {
         'projects': Project.objects.all(),
         'tasks': Task.objects.filter(task_status='NOTDONE').extra(
-            select={'in_future': "task_day <= {}".format(period)}).order_by('task_day'),
+            where=['task_day > %s', 'task_day <= %s'], params=[day, period]),
         'form': task_form,
         'form_p': project_form,
         'username': auth.get_user(request).username
