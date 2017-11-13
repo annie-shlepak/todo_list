@@ -28,11 +28,11 @@ $ git clone https://github.com/annie-shlepak/todo_list.git
 2) Create and run virtualenv:
 ```
 $ virtualenv -p python3 env
-$ cd env && source bin/activate && cd ..
+$ source env/bin/activate
 ```
 3) Open the project folder and install all requirements needed via pip:
 ```
-cd todo_list && pip install requirements.txt
+pip install requirements.txt
 ```
 4) Run project (be sure that 8000 port is free):
 ```
