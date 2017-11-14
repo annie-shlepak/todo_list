@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^delete_task/(?P<task_id>\d+)/$', views.delete_task, name="delete_task"),
     url(r'^delete_project/(?P<project_id>\d+)/$', views.delete_project, name="delete_project"),
     url(r'^finish_task/(?P<task_id>\d+)/$', views.finish_task, name='finish_task'),
+    url(r'^profile/$', views.view_profile, name='view_profile'),
+    url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
     url(r'^', views.get_today_task, name='get_today_task'),
-
 ]

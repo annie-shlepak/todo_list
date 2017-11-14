@@ -105,3 +105,6 @@ venv.bak/
 
 # DB
 .sqlite3
+
+# idea folder
+.idea/

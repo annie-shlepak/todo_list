@@ -7,6 +7,7 @@ random_string_generator is located here:
 http://joincfe.com/blog/random-string-generator-in-python/
 '''
 
+
 def unique_slug_generator(instance, new_slug=None):
     """
     This is for a Django project and it assumes your instance

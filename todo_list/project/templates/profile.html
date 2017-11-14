@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block main %}
+    <h3>PROFILE</h3>
+    <p>Username: {{ user }}</p>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+{% endblock %}
