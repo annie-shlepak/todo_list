@@ -106,8 +106,8 @@ def add_project(request):
 
 
 @login_required(login_url='/auth/login/')
-def edit_task(request, task_id):
-    instance = get_object_or_404(Task, id=task_id)
+def edit_task(request, slug):
+    instance = get_object_or_404(Task, slug=slug)
     form = TaskForm(request.POST or None, instance=instance)
     form_p = ProjectForm(request.POST or None)
     if form.is_valid():
@@ -148,8 +148,8 @@ def edit_project(request, project_id):
 
 
 @login_required(login_url='/auth/login/')
-def delete_task(request, task_id):
-    Task.objects.get(id=task_id).delete()
+def delete_task(request, slug):
+    Task.objects.get(slug=slug).delete()
     return redirect('/')
 
 
@@ -164,8 +164,8 @@ def delete_project(request, project_id):
 
 
 @login_required(login_url='/auth/login/')
-def finish_task(request, task_id):
-    Task.objects.select_related().filter(id=task_id).update(task_status='DONE')
+def finish_task(request, slug):
+    Task.objects.select_related().filter(slug=slug).update(task_status='DONE')
     return redirect('/')
 
 
@@ -185,7 +185,7 @@ def edit_profile(request):
             form.save()
             return redirect('/profile/')
     else:
-        form = UserChangeForm(instance=request.u)
+        form = UserChangeForm(instance=request.user)
         context = {
             'form': form
         }
