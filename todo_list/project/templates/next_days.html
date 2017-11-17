@@ -3,16 +3,16 @@
 
 {% block main %}
 <h3>NEXT 7 DAYS</h3>
-<!--{% if username %}-->
-{% for task in tasks %}
-    <div id="task">
-        {{ task.title }} <i>till {{ task.task_day }}</i>
-    </div>
-    {% include 'includes/_options.html' %}
-    {% block options %}{% endblock %}
-{% endfor %}
+{% if username %}
+    {% for task in tasks %}
+        <div id="task">
+            {{ task.title }} <i>till {{ task.task_day }}</i>
+        </div>
+        {% include 'includes/_options.html' %}
+        {% block options %}{% endblock %}
+    {% endfor %}
     <hr>
     {% include 'includes/_add_task.html' %}
     {% block add_task %}{% endblock %}
-<!--{% endif %}-->
+{% endif %}
 {% endblock %}

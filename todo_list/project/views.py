@@ -3,106 +3,80 @@ from datetime import date, timedelta
 from django.conf import settings
 from django.contrib import auth, messages
 from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import csrf
+
+from django.views import View
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 from .models import Project, Task
 from .forms import TaskForm, ProjectForm
 
 
-@login_required(login_url='/auth/login/')
-def get_today_task(request):
-    context = {
-        'projects': Project.objects.all(),
-        'tasks': Task.objects.filter(task_day=date.today(), task_status='NOTDONE').order_by('task_time'),
-        'form': TaskForm,
-        'form_p': ProjectForm,
-        'username': auth.get_user(request).username
-    }
-    context.update(csrf(request))
-    return render(request, 'today.html', context)
+class TodayTasksView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            'projects': Project.objects.all(),
+            'tasks': Task.objects.filter(task_day=date.today(), task_status='NOTDONE').order_by('task_time'),
+            'form': TaskForm,
+            'form_p': ProjectForm,
+            'username': auth.get_user(request).username
+        }
+        return render(request, 'today.html', context)
 
 
-@login_required(login_url='/auth/login/')
-def get_next_days_task(request):
-    day = date.today()
-    period = day + timedelta(days=7)
-    period.strftime('%Y-%m-%d')
-    context = {
-        'projects': Project.objects.all(),
-        'tasks': Task.objects.filter(task_status='NOTDONE').extra(
-            where=['task_day > %s', 'task_day <= %s'], params=[day, period]),
-        'form': TaskForm,
-        'form_p': ProjectForm,
-        'username': auth.get_user(request).username
-    }
-    return render(request, 'next_days.html', context)
+class NextDaysTasksView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        period = date.today() + timedelta(days=7)
+        period.strftime('%Y-%m-%d')
+        context = {
+            'projects': Project.objects.all(),
+            'tasks': Task.objects.filter(task_status='NOTDONE').extra(
+                where=['task_day > %s', 'task_day <= %s'], params=[date.today(), period]),
+            'form': TaskForm,
+            'form_p': ProjectForm,
+            'username': auth.get_user(request).username
+        }
+        return render(request, 'next_days.html', context)
 
 
-@login_required(login_url='/auth/login/')
-def get_project_tasks(request, project_id=None):
-    context = {
-        'projects': Project.objects.all(),
-        'project': Project.objects.get(id=project_id),
-        'tasks': Task.objects.filter(task_project_id=project_id, task_status='NOTDONE'),
-        'form': TaskForm,
-        'form_p': ProjectForm,
-        'username': auth.get_user(request).username
-    }
-    return render(request, 'project_tasks.html', context)
+class ProjectTasksView(LoginRequiredMixin, View):
+    def get(self, request, project_id, *args, **kwargs):
+        context = {
+            'projects': Project.objects.all(),
+            'project': Project.objects.get(id=project_id),
+            'tasks': Task.objects.filter(task_project_id=project_id, task_status='NOTDONE'),
+            'form': TaskForm,
+            'form_p': ProjectForm,
+            'username': auth.get_user(request).username
+        }
+        return render(request, 'project_tasks.html', context)
 
 
-@login_required(login_url='/auth/login/')
-def get_archive(request):
-    context = {
-        'projects': Project.objects.all(),
-        'tasks': Task.objects.filter(task_status='DONE'),
-        'form_p': ProjectForm,
-        'username': auth.get_user(request).username
-    }
-    return render(request, 'archive.html', context)
+class ArchiveView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwaqrgs):
+        context = {
+            'projects': Project.objects.all(),
+            'tasks': Task.objects.filter(task_status='DONE'),
+            'form_p': ProjectForm,
+            'username': auth.get_user(request).username
+        }
+        return render(request, 'archive.html', context)
 
 
-@login_required(login_url='/auth/login/')
-def add_today_task(request):
-    if request.POST:
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Successfully Added.')
-        else:
-            messages.error(request, 'Not Successfully Added.')
-    return redirect('/')
+class AddTaskView(LoginRequiredMixin, CreateView):
+    form_class = TaskForm
+    success_url = '/'
 
 
-@login_required(login_url='/auth/login/')
-def add_project_task(request, project_id):
-    if request.POST:
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-    return redirect('/project_tasks/{}/'.format(project_id))
-
-
-@login_required(login_url='/auth/login/')
-def add_project(request):
-    if request.POST:
-        form_p = ProjectForm(request.POST)
-        if form_p.is_valid():
-            new_instance = form_p.save(commit=False)
-            new_instance.save()
-            return redirect('/')
-    else:
-        form_p = ProjectForm()
-    context = {
-        'projects': Project.objects.all(),
-        "form_p": form_p,
-        'username': auth.get_user(request).username,
-
-    }
-    return render(request, 'index.html', context)
+class AddProjectView(LoginRequiredMixin, CreateView):
+    form_class = ProjectForm
+    success_url = '/'
 
 
 @login_required(login_url='/auth/login/')
@@ -115,7 +89,6 @@ def edit_task(request, slug):
         instance.save()
         new_instance.save()
         return HttpResponseRedirect('/today/')
-
     context = {
         "projects": Project.objects.all(),
         'username': auth.get_user(request).username,
@@ -147,10 +120,22 @@ def edit_project(request, project_id):
     return render(request, 'edit_project.html', context)
 
 
-@login_required(login_url='/auth/login/')
-def delete_task(request, slug):
-    Task.objects.get(slug=slug).delete()
-    return redirect('/')
+class DeleteTaskView(LoginRequiredMixin, DeleteView):
+    form_class = TaskForm
+    template_name = 'task_confirm_delete.html'
+    success_url = reverse_lazy('today-tasks')
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get('slug')
+        obj = get_object_or_404(Task, slug=slug)
+        return obj
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            "projects": Project.objects.all(),
+            'username': auth.get_user(request).username,
+        }
+        return render(request, self.template_name, context)
 
 
 @login_required(login_url='/auth/login/')

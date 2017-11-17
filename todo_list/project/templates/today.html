@@ -3,16 +3,16 @@
 
 {% block main %}
 <h3>TODAY</h3><h6>{% now "jS F Y" %}</h6>
-<!--{% if username %}-->
-{% for task in tasks %}
-    <div id="task">
-        {{ task.title }} <i>till {{ task.task_time }}</i>
-    </div>
-    {% include 'includes/_options.html' %}
-    {% block options %}{% endblock %}
-{% endfor %}
+{% if username %}
+    {% for task in tasks %}
+        <div id="task">
+            {{ task.title }} <i>till {{ task.task_time }}</i>
+        </div>
+        {% include 'includes/_options.html' %}
+        {% block options %}{% endblock %}
+    {% endfor %}
     <hr>
     {% include 'includes/_add_task.html' %}
     {% block add_task %}{% endblock %}
-<!--{% endif %}-->
+{% endif %}
 {% endblock %}

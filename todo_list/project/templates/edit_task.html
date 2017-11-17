@@ -3,11 +3,11 @@
 
 {% block main %}
 <h3>EDIT TASK</h3>
-<!--{% if username %}-->
+{% if username %}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
-<!--{% endif %}-->
+{% endif %}
 {% endblock %}
