@@ -1,5 +1,6 @@
 # TO-DO list
-A simple web application to manage your tasks and be more productive
+A simple web application to manage your tasks and be more productive.
+
 Functionality:
 * adding, deleting, editing, finishing tasks
 * adding, deleting, editing projects
@@ -21,7 +22,7 @@ To install virtualenv:
 $ pip install virualenv
 ```
 ### Installing
-1) Clone thee project:
+1) Clone the project:
 ```
 $ git clone https://github.com/annie-shlepak/todo_list.git
 ```
@@ -39,6 +40,6 @@ pip install requirements.txt
 $ cd todo_list && python manage.py runserver
 ```
 ## Versioning
-Using Python 3.5.3 & Django 1.11.5
+Python 3.5.3 & Django 1.11.5
 ### Authors
 * **Anna Shlepak**
