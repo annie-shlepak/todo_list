@@ -86,7 +86,6 @@ def edit_task(request, slug):
     form_p = ProjectForm(request.POST or None)
     if form.is_valid():
         new_instance = form.save(commit=False)
-        instance.save()
         new_instance.save()
         return HttpResponseRedirect('/today/')
     context = {
@@ -105,7 +104,6 @@ def edit_project(request, project_id):
     form_p = ProjectForm(request.POST or None, instance=instance)
     if form_p.is_valid():
         new_instance = form_p.save(commit=False)
-        instance.save()
         new_instance.save()
         messages.success(request, 'Successfully Edited.')
         return HttpResponseRedirect('/')
@@ -140,7 +138,6 @@ class DeleteTaskView(LoginRequiredMixin, DeleteView):
 
 @login_required(login_url='/auth/login/')
 def delete_project(request, project_id):
-    Project.objects.get(id=project_id)
     if Task.objects.filter(task_project_id=project_id, task_status='NOTDONE'):
         return redirect('/')
     else:
